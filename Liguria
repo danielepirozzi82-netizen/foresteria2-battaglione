@@ -1,0 +1,1627 @@
+<!DOCTYPE html> 
+<html lang="it"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Foresteria 2° Battaglione Carabinieri Liguria</title> 
+    <style> 
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&family=Open+Sans:wght@400;600;700&display=swap'); 
+        
+        :root { 
+            --blu-arma: #0a142c; 
+            --rosso-arma: #d90429; 
+            --sfondo-grigio: #f8fafc; 
+        } 
+
+        body { font-family: 'Open Sans', sans-serif; background-color: var(--sfondo-grigio); color: #1e293b; margin: 0; padding: 0; line-height: 1.6; overflow-x: hidden;} 
+        h1, h2, h3, h4 { font-family: 'Montserrat', sans-serif; } 
+        
+        header { 
+            background: var(--blu-arma); 
+            text-align: center; 
+            padding: 0; 
+            margin: 0; 
+            border-bottom: 6px solid var(--rosso-arma); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+            width: 100%; 
+        } 
+        
+        .banner-header { 
+            width: 100%; 
+            max-width: 1000px; 
+            height: auto; 
+            display: block; 
+            margin: 0 auto; 
+            object-fit: contain; 
+            cursor: pointer;
+        } 
+        
+        .lang-selector-wrapper { 
+            background: linear-gradient(180deg, var(--blu-arma), #16264c); 
+            padding: 12px 10px 18px 10px; 
+        } 
+
+        .lang-selector { display: flex; justify-content: center; gap: 15px; } 
+        .lang-btn { background: rgba(255,255,255,0.08); border: 2px solid rgba(255,255,255,0.15); padding: 10px 28px; border-radius: 30px; cursor: pointer; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 14px; color: #ffffff; transition: all 0.3s ease; } 
+        .lang-btn:hover { background: rgba(255,255,255,0.15); transform: scale(1.05);} 
+        .lang-btn.active { background: var(--rosso-arma); border-color: var(--rosso-arma); color: #ffffff; box-shadow: 0 6px 12px rgba(217, 4, 41, 0.4); transform: scale(1.05);} 
+        
+        .container { max-width: 850px; margin: 0 auto; padding: 20px; } 
+        .card { background: #ffffff; border-radius: 16px; padding: 30px; margin-bottom: 30px; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08); border-top: 4px solid var(--blu-arma);} 
+        
+        .contact-box { background: #fef2f2; border: 2px solid #fecaca; border-left: 6px solid var(--rosso-arma); border-radius: 12px; padding: 20px; margin-bottom: 25px; display: block; } 
+        .contact-icon { font-size: 30px; } 
+        .contact-text h4 { margin: 0 0 5px 0; color: var(--rosso-arma); font-size: 18px;} 
+        .contact-text p { margin: 0; font-size: 15px; color: #475569;} 
+        .phone-link { color: var(--rosso-arma); font-weight: 800; text-decoration: none; font-size: 18px; background: #fff; padding: 6px 12px; border-radius: 6px; display: inline-block; margin-top: 8px; border: 1px solid #fecaca; transition: all 0.3s ease;} 
+        .phone-link:hover { background: var(--rosso-arma); color: white; } 
+        
+        h2.section-title { color: var(--blu-arma); border-bottom: 3px solid var(--rosso-arma); padding-bottom: 12px; margin-top: 40px; font-size: 24px; display: flex; align-items: center; gap: 12px;} 
+        .fiamma-icon { width: 22px; height: auto; } 
+
+        .btn { display: inline-flex; align-items: center; justify-content: center; background-color: var(--blu-arma); color: white; padding: 12px 22px; border-radius: 10px; text-decoration: none; font-weight: 700; margin-top: 10px; margin-right: 10px; font-size: 14px; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(10, 20, 44, 0.15);} 
+        .btn-call { background-color: var(--rosso-arma); box-shadow: 0 4px 6px rgba(217, 4, 41, 0.2);} 
+        .btn-info { background-color: #0284c7; box-shadow: 0 4px 6px rgba(2, 132, 199, 0.2);} 
+        .btn-treno { background-color: #ef4444; color: white; border: 2px solid #b91c1c; font-size: 13px; padding: 8px 12px;} 
+        .btn-meteo { background-color: #0284c7; color: white; border: 1px solid #0369a1; } 
+        .btn:hover { transform: translateY(-4px); box-shadow: 0 8px 15px rgba(0,0,0,0.2); opacity: 0.95; color: white; } 
+
+        /* BOTTONE COPIA */
+        .btn-copy {
+            background-color: #334155;
+            color: #ffffff;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: 8px;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            vertical-align: middle;
+        }
+        .btn-copy:hover {
+            background-color: var(--rosso-arma);
+        }
+        .btn-copy:active {
+            transform: scale(0.95);
+        }
+
+        /* MAPPA INTERATTIVA PALAZZINA COMANDO */
+        .interactive-map-container {
+            position: relative;
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #cbd5e1;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .interactive-map-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .map-pin {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            cursor: pointer;
+            z-index: 5;
+            transition: all 0.3s ease;
+            animation: pulsePin 2s infinite;
+        }
+
+        /* POSIZIONI PIN */
+        .map-pin-bar {
+            top: 70%;
+            left: 85%;
+            background: #d97706;
+            box-shadow: 0 0 0 2px rgba(217, 119, 6, 0.3), 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .map-pin-atm {
+            top: 61.5%;
+            left: 49.8%;
+            background: #16a34a;
+            box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.3), 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .map-pin-gym {
+            top: 77.5%;
+            left: 49.8%;
+            background: #0284c7;
+            box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.3), 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .map-pin.highlighted {
+            transform: translate(-50%, -50%) scale(1.4);
+            z-index: 10;
+        }
+
+        @keyframes pulsePin {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.15); }
+        }
+
+        /* SVG OVERLAY PER ANIMAZIONE PERCORSO */
+        .svg-route-overlay {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 4;
+        }
+
+        .animated-path {
+            stroke-dasharray: 100;
+            stroke-dashoffset: 100;
+            transition: stroke-dashoffset 2s linear;
+        }
+
+        .animated-path.active {
+            stroke-dashoffset: 0;
+            animation: dash 1.5s linear infinite;
+        }
+
+        @keyframes dash {
+            to { stroke-dashoffset: -20; }
+        }
+
+        /* CAROSELLO ORIZZONTALE PER SCHEDE */
+        .scroll-hint {
+            text-align: right;
+            font-size: 13px;
+            color: var(--rosso-arma);
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .horizontal-scroll-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 20px;
+            padding-top: 10px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: var(--rosso-arma) #e2e8f0;
+        }
+
+        .horizontal-scroll-container::-webkit-scrollbar { height: 8px; }
+        .horizontal-scroll-container::-webkit-scrollbar-track { background: #e2e8f0; border-radius: 10px; }
+        .horizontal-scroll-container::-webkit-scrollbar-thumb { background: var(--rosso-arma); border-radius: 10px; }
+
+        .service-scroll-card {
+            flex: 0 0 85%;
+            max-width: 360px;
+            scroll-snap-align: center;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid var(--blu-arma);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .place-card-scroll {
+            flex: 0 0 85%;
+            max-width: 380px;
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+
+        .restaurant-scroll-card {
+            flex: 0 0 85%;
+            max-width: 350px;
+            scroll-snap-align: center;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 12px 25px -5px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            border-top: 4px solid var(--blu-arma);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .place-img { width: 100%; height: 220px; object-fit: cover; background-color: #e2e8f0; border-bottom: 4px solid var(--blu-arma); cursor: pointer; transition: transform 0.3s ease;} 
+        .place-img:hover { transform: scale(1.02); }
+        
+        .place-content { padding: 20px; position: relative; z-index: 2; background: white; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between;} 
+        .place-content h3 { margin: 0 0 8px 0; color: var(--blu-arma); font-size: 20px; font-weight: 800;} 
+        .dist { color: var(--rosso-arma); font-size: 13px; margin-bottom: 12px; font-weight: 800; display: block; text-transform: uppercase; letter-spacing: 0.5px;} 
+        .desc { font-size: 14px; margin-top: 0; color: #475569; margin-bottom: 15px;} 
+        
+        .buttons-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto;} 
+
+        .lang-content { display: none; } 
+
+        .info-list { padding-left: 0; list-style-type: none; margin: 0;} 
+        .info-list li { margin-bottom: 25px; padding-left: 35px; position: relative; transition: transform 0.3s ease; } 
+        .info-list li:hover { transform: translateX(5px); } 
+        .info-list li:last-child { margin-bottom: 0; } 
+        .info-list li span.emoji { position: absolute; left: 0; top: 0; font-size: 22px; } 
+
+        .reveal { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: all 0.8s cubic-bezier(0.5, 0, 1); 
+        } 
+        .reveal.active { 
+            opacity: 1; 
+            transform: translateY(0); 
+        } 
+
+        /* Meteo Dinamico */ 
+        .live-weather-card { 
+            background: linear-gradient(135deg, #0284c7, #0369a1); 
+            color: white; 
+            padding: 20px; 
+            border-radius: 14px; 
+            text-align: center; 
+            margin-bottom: 20px; 
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25); 
+            transition: transform 0.3s ease; 
+        } 
+        .live-weather-card:hover { transform: scale(1.02); } 
+        .live-weather-icon { font-size: 48px; margin: 5px 0; display: inline-block; animation: float 3s ease-in-out infinite; } 
+        .live-weather-temp { font-size: 32px; font-weight: 900; font-family: 'Montserrat', sans-serif; } 
+        .live-weather-text { font-size: 15px; font-weight: 600; opacity: 0.9; } 
+
+        @keyframes float { 
+            0% { transform: translateY(0px); } 
+            50% { transform: translateY(-6px); } 
+            100% { transform: translateY(0px); } 
+        }
+
+        /* Acquario Animato */
+        .aquarium-animated-box {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+            background-color: #032b43;
+        }
+        .aquarium-animated-box .place-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-bottom: 4px solid var(--blu-arma);
+            display: block;
+        }
+        .aquarium-shimmer {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(120deg, rgba(255,255,255,0) 20%, rgba(255,255,255,0.18) 50%, rgba(255,255,255,0) 80%);
+            background-size: 200% 200%;
+            animation: waterFlow 7s ease-in-out infinite;
+            pointer-events: none;
+            mix-blend-mode: overlay;
+        }
+        @keyframes waterFlow {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        .aquarium-bubble {
+            position: absolute;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.85), rgba(255,255,255,0.25));
+            border-radius: 50%;
+            pointer-events: none;
+            box-shadow: 0 0 5px rgba(255,255,255,0.5);
+            bottom: -25px;
+            animation: bubbleRise 6s infinite ease-in;
+        }
+        .ab1 { width: 14px; height: 14px; left: 18%; animation-duration: 5s; animation-delay: 0.5s; }
+        .ab2 { width: 8px; height: 8px; left: 38%; animation-duration: 4.2s; animation-delay: 2s; }
+        .ab3 { width: 18px; height: 18px; left: 65%; animation-duration: 6s; animation-delay: 1.2s; }
+        .ab4 { width: 10px; height: 10px; left: 82%; animation-duration: 4.8s; animation-delay: 3s; }
+        .ab5 { width: 12px; height: 12px; left: 50%; animation-duration: 5.5s; animation-delay: 0s; }
+
+        @keyframes bubbleRise {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            20% { opacity: 0.75; }
+            50% { transform: translateY(-130px) translateX(8px); }
+            80% { opacity: 0.75; }
+            100% { transform: translateY(-290px) translateX(-6px); opacity: 0; }
+        }
+
+        .aquarium-fish {
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            filter: drop-shadow(0 3px 5px rgba(0,0,0,0.5));
+            z-index: 3;
+        }
+        .af-right1 { top: 22%; font-size: 24px; animation: swimToRight 15s linear infinite; }
+        .af-left1 { top: 68%; font-size: 22px; animation: swimToLeft 19s linear infinite; animation-delay: 2.5s; }
+        .af-right2 { top: 50%; font-size: 18px; animation: swimToRight 22s linear infinite; animation-delay: 8s; }
+        .af-left2 { top: 14%; font-size: 26px; animation: swimToLeft 13s linear infinite; animation-delay: 6s; }
+
+        @keyframes swimToRight {
+            0% { left: -70px; transform: scaleX(1) translateY(0); opacity: 0; }
+            6% { opacity: 0.95; }
+            50% { transform: scaleX(1) translateY(-10px); }
+            94% { opacity: 0.95; }
+            100% { left: 105%; transform: scaleX(1) translateY(0); opacity: 0; }
+        }
+        @keyframes swimToLeft {
+            0% { right: -70px; transform: scaleX(-1) translateY(0); opacity: 0; }
+            6% { opacity: 0.9; }
+            50% { transform: scaleX(-1) translateY(8px); }
+            94% { opacity: 0.9; }
+            100% { right: 105%; transform: scaleX(-1) translateY(0); opacity: 0; }
+        }
+
+        .aquarium-badge {
+            position: absolute;
+            top: 15px; right: 15px;
+            background: rgba(217, 4, 41, 0.92);
+            color: #ffffff;
+            font-size: 11px; font-weight: 800;
+            padding: 6px 12px; border-radius: 20px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.4);
+            z-index: 4;
+            animation: badgePulse 2.5s infinite;
+        }
+        @keyframes badgePulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        /* MODALE LIGHTBOX PER ZOOM FOTO */
+        .image-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(10, 20, 44, 0.95);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        .image-modal-content {
+            max-width: 92%;
+            max-height: 85%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            object-fit: contain;
+            transition: transform 0.3s ease;
+        }
+        .image-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: white;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 10000;
+            background: rgba(217, 4, 41, 0.8);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+        .zoom-hint {
+            position: absolute;
+            bottom: 20px;
+            color: #ffffff;
+            font-size: 13px;
+            background: rgba(0,0,0,0.6);
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+        
+        /* SEZIONE NOTIZIE TG24 MODERNA */
+        .sky-news-header {
+            background: linear-gradient(90deg, #0f172a, #1e293b);
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 4px solid #dc2626;
+        }
+        .sky-news-badge {
+            background: #dc2626;
+            color: white;
+            font-weight: 900;
+            font-family: 'Montserrat', sans-serif;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 15px;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.5);
+        }
+        .sky-news-pulse {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #dc2626;
+            border-radius: 50%;
+            animation: pulseNews 1.5s infinite;
+        }
+        @keyframes pulseNews {
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(220, 38, 38, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+        }
+        .news-carousel-wrapper {
+            position: relative;
+            background: #ffffff;
+            overflow: hidden;
+            padding: 15px 20px;
+        }
+        .news-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            gap: 15px;
+        }
+        .news-carousel::-webkit-scrollbar { display: none; }
+        .news-card-item {
+            flex: 0 0 100%;
+            max-width: 100%;
+            scroll-snap-align: start;
+            box-sizing: border-box;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-left: 4px solid var(--blu-arma);
+            border-radius: 10px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .news-item-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--blu-arma);
+            margin: 0 0 8px 0;
+            line-height: 1.4;
+        }
+        .news-item-desc {
+            font-size: 13px;
+            color: #475569;
+            margin: 0 0 12px 0;
+            line-height: 1.5;
+        }
+        .news-item-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            color: #dc2626;
+            font-weight: 800;
+            text-decoration: none;
+            font-size: 13px;
+            margin-top: auto;
+        }
+        .news-nav-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .news-nav-btn:hover { background: var(--rosso-arma); border-color: var(--rosso-arma); }
+
+        /* REGOLAMENTO CAROSELLO SCORREVOLE COMPATTO */
+        .rule-scroll-card {
+            flex: 0 0 80%;
+            max-width: 300px;
+            scroll-snap-align: center;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            border-top: 4px solid var(--rosso-arma);
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .rule-icon-circle {
+            width: 45px;
+            height: 45px;
+            background: #fee2e2;
+            color: #dc2626;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+        .rule-text {
+            font-size: 14px;
+            color: #1e293b;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+    </style> 
+</head> 
+<body> 
+    <header> 
+        <img src="https://i.imgur.com/PZXkpln.jpg" alt="Foresteria Legione Carabinieri Liguria" class="banner-header" onclick="openModal(this.src)">
+        <div class="lang-selector-wrapper"> 
+            <div class="lang-selector"> 
+                <button class="lang-btn active" id="btn-it" onclick="setLanguage('it')">🇮🇹 IT</button> 
+                <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">🇬🇧 EN</button> 
+            </div> 
+        </div> 
+    </header> 
+    
+    <div class="container"> 
+        <!-- TITOLO BENVENUTO --> 
+        <h2 class="section-title reveal active" style="margin-top: 10px;"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Benvenuti</span> 
+            <span class="lang-content lang-en">Welcome</span> 
+        </h2> 
+
+        <!-- BOX CONTATTI --> 
+        <div class="card reveal active"> 
+            <div class="contact-box"> 
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;"> 
+                    <div class="contact-icon">📞</div> 
+                    <div class="contact-text"> 
+                        <h4 class="lang-content lang-it">Referenti Foresterie</h4> 
+                        <h4 class="lang-content lang-en">Guesthouse Referents</h4> 
+                        <p class="lang-content lang-it">Reperibili dal <strong>Lunedì al Venerdì (09:00 - 12:00)</strong>:</p> 
+                        <p class="lang-content lang-en">Available <strong>Mon - Fri (09:00 AM - 12:00 PM)</strong>:</p> 
+                        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                            <a href="tel:+3901035608214" class="phone-link">010 35608214</a>
+                            <a href="tel:+3901035608253" class="phone-link">010 35608253</a>
+                        </div>
+                    </div> 
+                </div> 
+
+                <!-- BOX ALTRI ORARI / PORTA PRINCIPALE --> 
+                <div style="background: #ffffff; padding: 15px; border-radius: 8px; border-left: 4px solid var(--blu-arma); border: 1px solid #fecaca;"> 
+                    <h4 class="lang-content lang-it" style="margin: 0 0 5px 0; color: var(--blu-arma); font-size: 16px;">⚠️ Altri giorni e orari</h4> 
+                    <h4 class="lang-content lang-en" style="margin: 0 0 5px 0; color: var(--blu-arma); font-size: 16px;">⚠️ Other days and times</h4> 
+                    <p class="lang-content lang-it" style="margin: 0; font-size: 14px; color: #475569;">Per gli orari non coperti dai referenti, contattare la <strong>Porta Principale</strong>:</p> 
+                    <p class="lang-content lang-en" style="margin: 0; font-size: 14px; color: #475569;">Outside of the referents' hours, please contact the <strong>Main Gate</strong>:</p> 
+                    <a href="tel:+3901035605981" class="phone-link" style="color: var(--blu-arma); border-color: #cbd5e1; background: #f8fafc; margin-top: 8px;">010 35605981</a>
+                </div> 
+            </div> 
+
+            <div class="lang-content lang-it"> 
+                <p class="desc">Benvenuti nella <strong>Foresteria del 2° Battaglione Carabinieri Liguria</strong> di Genova Sturla. Vi auguriamo un sereno soggiorno. Struttura destinata al personale in servizio, in congedo e ai loro familiari. Per informazioni turistiche generali, visitate: <br><a href="https://www.visitgenoa.it/it" target="_blank" style="color: var(--rosso-arma); font-weight: 700; text-decoration: none;">🌐 Visit Genoa - Sito Ufficiale</a></p> 
+            </div> 
+            <div class="lang-content lang-en"> 
+                <p class="desc">Welcome to the <strong>2nd Battalion Carabinieri Liguria Guesthouse</strong> in Genoa Sturla. We wish you a pleasant stay. For general tourist information, consult: <br><a href="https://www.visitgenoa.it/en" target="_blank" style="color: var(--rosso-arma); font-weight: 700; text-decoration: none;">🌐 Visit Genoa - Official Portal</a></p> 
+            </div> 
+        </div> 
+
+        <!-- SEZIONE CHECK-IN, CHECK-OUT E PAGAMENTI (CAROSELLO SCORREVOLE) -->
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Check-in, Check-out & Pagamenti</span> 
+            <span class="lang-content lang-en">Check-in, Check-out & Payments</span> 
+        </h2> 
+
+        <div class="scroll-hint">👈 SCORRI VERSO DESTRA PER VEDERE TUTTI I DETTAGLI 👉</div>
+
+        <div class="horizontal-scroll-container reveal">
+            <!-- SCHEDA 1: CHECK-IN / CHECK-OUT -->
+            <div class="service-scroll-card" style="border-top-color: var(--rosso-arma);">
+                <div>
+                    <h4 style="color: var(--blu-arma); margin-top: 0; margin-bottom: 12px; font-size: 18px;">🔑 <span class="lang-content lang-it">Orari Check-in e Check-out</span><span class="lang-content lang-en">Check-in & Check-out Times</span></h4>
+                    <div class="lang-content lang-it">
+                        <p class="desc">Le camere, per ragioni organizzative, saranno fruibili <strong>dopo le ore 14:00</strong> del giorno di arrivo.</p>
+                        <p class="desc">Devono essere lasciate libere <strong>entro le ore 10:00</strong> del giorno di partenza.</p>
+                    </div>
+                    <div class="lang-content lang-en">
+                        <p class="desc">For organizational reasons, rooms will be available <strong>after 2:00 PM</strong> on arrival day.</p>
+                        <p class="desc">Rooms must be vacated <strong>by 10:00 AM</strong> on departure day.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SCHEDA 2: TARIFFE E PAGAMENTO -->
+            <div class="service-scroll-card" style="border-top-color: var(--rosso-arma); flex: 0 0 90%; max-width: 420px;">
+                <div>
+                    <h4 style="color: var(--blu-arma); margin-top: 0; margin-bottom: 10px; font-size: 18px;">💳 <span class="lang-content lang-it">Tariffe e Bonifico</span><span class="lang-content lang-en">Rates & Payment</span></h4>
+                    <div class="lang-content lang-it">
+                        <p class="desc" style="margin-bottom: 8px;">Le tariffe sono soggette ad aggiornamento periodico da parte del Comando Generale dell'Arma dei Carabinieri ed il pagamento dovrà avvenire integralmente entro 5 giorni dalla data del check out (assolutamente non prima dell'inizio e durante il soggiorno), tramite bonifico su c/c intestato a Difesa Servizi s.p.a.</p>
+                    </div>
+                    <div class="lang-content lang-en">
+                        <p class="desc" style="margin-bottom: 8px;">Rates are subject to periodic updates by the Carabinieri General Headquarters. Payment in full must be made within 5 days from the check-out date (absolutely not before or during the stay) to Difesa Servizi s.p.a.</p>
+                    </div>
+
+                    <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid var(--blu-arma); padding: 12px; border-radius: 8px; font-size: 13px;">
+                        <p style="margin: 0 0 6px 0;">
+                            <strong>Intestato:</strong> <span id="text-holder">Difesa Servizi s.p.a.</span>
+                            <button class="btn-copy" onclick="copyToClipboard('text-holder', this)">📋 Copia</button>
+                        </p>
+                        <p style="margin: 0 0 8px 0; font-family: monospace; color: var(--blu-arma); font-weight: 700; word-break: break-all;">
+                            IBAN: <span id="text-iban">IT74H0760103200001031975111</span>
+                            <button class="btn-copy" onclick="copyToClipboard('text-iban', this)">📋 Copia</button>
+                        </p>
+                        <p style="margin: 0 0 2px 0; font-weight: 700; color: var(--rosso-arma);">Causale obbligatoria:</p>
+                        <ul style="margin: 0; padding-left: 15px; color: #475569; font-size: 12px;">
+                            <li>N. Prenotazione (da mail) | Nome Cognome | Periodo</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE REGOLAMENTO (CAROSELLO SCORREVOLE TOUCH) -->
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Regolamento Camere</span> 
+            <span class="lang-content lang-en">Room Regulations</span> 
+        </h2> 
+        
+        <div class="scroll-hint">👈 SCORRI CON IL DITO COSA NON È CONSENTITO 👉</div>
+
+        <div class="horizontal-scroll-container reveal">
+            <div class="rule-scroll-card">
+                <div class="rule-icon-circle">🔊</div>
+                <div class="rule-text"><strong>RUMORI</strong><br>Non è consentito provocare rumori che possano arrecare disturbo.</div>
+            </div>
+            <div class="rule-scroll-card">
+                <div class="rule-icon-circle">🔥</div>
+                <div class="rule-text"><strong>INFIAMMABILI</strong><br>È vietato tenere in camera macchinari ed oggetti infiammabili.</div>
+            </div>
+            <div class="rule-scroll-card">
+                <div class="rule-icon-circle">🚭</div>
+                <div class="rule-text"><strong>DIVIETO FUMO</strong><br>È severamente vietato fumare, nel rispetto della legge.</div>
+            </div>
+            <div class="rule-scroll-card">
+                <div class="rule-icon-circle">🪑</div>
+                <div class="rule-text"><strong>ERGONOMIA</strong><br>Non introdurre arredi estranei per non ostacolare le vie di fuga antincendio.</div>
+            </div>
+            <div class="rule-scroll-card">
+                <div class="rule-icon-circle">🔌</div>
+                <div class="rule-text"><strong>IMPIANTI</strong><br>Vietato alterare impianti elettrici, idraulici, telefonici o TV.</div>
+            </div>
+            <div class="rule-scroll-card" style="border-top-color: var(--blu-arma); background: #f8fafc;">
+                <div class="rule-icon-circle" style="background: #e2e8f0; color: var(--blu-arma);">⚠️</div>
+                <div class="rule-text"><strong>DEPOSITI & VALORI</strong><br>Nessun oggetto va lasciato in deposito. L'Amministrazione non risponde di valori incustoditi.</div>
+            </div>
+        </div>
+
+        <!-- SEZIONE UNIFICATA: SERVIZI UTILI & COME ORIENTARSI IN CASERMA -->
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Servizi Utili & Come Orientarsi in Caserma</span> 
+            <span class="lang-content lang-en">Useful Services & Barracks Orientation</span> 
+        </h2> 
+
+        <!-- MAPPA INTERATTIVA PALAZZINA COMANDO -->
+        <div class="card reveal" style="padding: 20px; margin-bottom: 15px;">
+            <div class="interactive-map-container" style="margin-bottom: 12px;">
+                <img src="https://i.imgur.com/wrZ5wFc.jpg" alt="Palazzina Comando Legione Carabinieri Liguria" class="interactive-map-img" id="palazzinaImg" onclick="openModal(this.src)">
+                
+                <svg class="svg-route-overlay" viewBox="0 0 100 100" preserveAspectRatio="none">
+                    <path id="routeBar" d="M 50 95 L 72 83 L 85 70" fill="none" stroke="#d97706" stroke-width="1.8" stroke-dasharray="4 2" class="animated-path" style="display:none;" />
+                    <path id="routeATM" d="M 50 95 L 49.8 81 L 49.8 61.5" fill="none" stroke="#16a34a" stroke-width="1.8" stroke-dasharray="4 2" class="animated-path" style="display:none;" />
+                    <path id="routeGym" d="M 50 95 L 49.8 77.5" fill="none" stroke="#0284c7" stroke-width="1.8" stroke-dasharray="4 2" class="animated-path" style="display:none;" />
+                </svg>
+
+                <div class="map-pin map-pin-bar" id="pinBar" title="Bar" onclick="animatePath('bar')">☕</div>
+                <div class="map-pin map-pin-atm" id="pinATM" title="Bancomat ATM" onclick="animatePath('atm')">💶</div>
+                <div class="map-pin map-pin-gym" id="pinGym" title="Struttura Sportiva" onclick="animatePath('gym')">🏋️‍♂️</div>
+            </div>
+
+            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                <button onclick="animatePath('bar')" class="btn" style="margin:0; flex:1; font-size:11px; padding: 8px 6px; background-color:#d97706;">☕ BAR</button>
+                <button onclick="animatePath('atm')" class="btn" style="margin:0; flex:1; font-size:11px; padding: 8px 6px; background-color:#16a34a;">💶 BANCOMAT</button>
+                <button onclick="animatePath('gym')" class="btn btn-info" style="margin:0; flex:1; font-size:11px; padding: 8px 6px;">🏋️‍♂️ PALESTRA</button>
+            </div>
+        </div>
+
+        <div class="scroll-hint">👈 SCORRI VERSO DESTRA PER TUTTI I SERVIZI 👉</div>
+
+        <!-- CAROSELLO SERVIZI UTILI E DETTAGLIATI IN CASERMA -->
+        <div class="horizontal-scroll-container reveal">
+            <!-- BAR -->
+            <div class="service-scroll-card">
+                <div>
+                    <h4 style="color: var(--blu-arma); margin-top:0;">☕ Bar <a href="tel:+3901035605975" class="phone-link" style="font-size: 13px; margin-left: 5px;">📞 010 35605975</a></h4>
+                    <div class="lang-content lang-it">
+                        <p class="desc"><strong>Ubicazione:</strong> Guardando la Palazzina Comando Legione, salendo le prime scale a destra sulla porta indicata dal segnaposto arancione sulla foto.</p>
+                        <p class="desc"><strong>Orari:</strong> Lun-Ven 06:30-15:00 | Sab 06:30-11:00 (Domenica e festivi chiuso).</p>
+                        <p class="desc">Sono inoltre disponibili distributori automatici (bevande calde/fredde e spuntini).</p>
+                    </div>
+                    <div class="lang-content lang-en">
+                        <p class="desc"><strong>Location:</strong> Command Building, first stairs on the right (orange pin).</p>
+                        <p class="desc"><strong>Hours:</strong> Mon-Fri 06:30-15:00 | Sat 06:30-11:00 (Closed Sun/Holidays).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BANCOMAT -->
+            <div class="service-scroll-card">
+                <div>
+                    <h4 style="color: var(--blu-arma); margin-top:0;">💶 Bancomat ATM</h4>
+                    <div class="lang-content lang-it">
+                        <p class="desc"><strong>Ubicazione:</strong> Situato nella Palazzina Comando, salendo le scale ed entrando all'interno della <strong>porta grande centrale ad arco superiore</strong> (segnaposto verde), in un locale attiguo nei pressi del militare di servizio.</p>
+                    </div>
+                    <div class="lang-content lang-en">
+                        <p class="desc"><strong>Location:</strong> Command Building, inside the main upper central arched door (green pin), near the duty officer.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PALESTRA -->
+            <div class="service-scroll-card">
+                <div>
+                    <h4 style="color: var(--blu-arma); margin-top:0;">🏋️‍♂️ Struttura Sportiva</h4>
+                    <div class="lang-content lang-it">
+                        <p class="desc"><strong>Ubicazione:</strong> Porta centrale ad arco al piano terra della Palazzina Comando (segnaposto blu).</p>
+                        <p class="desc"><strong>Orari:</strong> Aperta tutti i giorni <strong>06:00 - 22:00</strong>.</p>
+                        <p class="desc" style="color: var(--rosso-arma); font-size: 13px;">⚠️ L'utilizzo è riservato <strong>esclusivamente al personale in servizio attivo</strong> ed è subordinato alla compilazione dell'apposita liberatoria (disponibile in stanza) preventivamente vistata dal Comandante del Reparto Comando.</p>
+                    </div>
+                    <div class="lang-content lang-en">
+                        <p class="desc"><strong>Location:</strong> Ground floor central arched door (blue pin).</p>
+                        <p class="desc"><strong>Hours:</strong> Open daily 06:00 AM - 10:00 PM.</p>
+                        <p class="desc" style="color: var(--rosso-arma); font-size: 13px;">⚠️ Strictly restricted to active-duty personnel with signed liability waiver approved by Commander.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MENSA -->
+            <div class="service-scroll-card">
+                <div>
+                    <h4 style="color: var(--blu-arma); margin-top:0;">🍽️ Mensa <a href="tel:+3901035605965" class="phone-link" style="font-size: 13px; margin-left: 5px;">📞 010 35605965</a></h4>
+                    <div class="lang-content lang-it">
+                        <p class="desc"><strong>Ubicazione:</strong> Piano terra, situata esattamente di fronte alla Palazzina Comando Legione.</p>
+                        <p class="desc"><strong>Orari tutti i giorni:</strong> 12:00 - 14:00 | 18:00 - 20:00</p>
+                        <p class="desc">Il costo di ogni singolo buono pasto è di <strong>€ 7,38</strong>. Per la fruizione fare riferimento alla mail di conferma prenotazione.</p>
+                    </div>
+                    <div class="lang-content lang-en">
+                        <p class="desc"><strong>Location:</strong> Ground floor, directly opposite the Command Building.</p>
+                        <p class="desc"><strong>Hours daily:</strong> 12:00 - 14:00 | 18:00 - 20:00 (Voucher € 7.38).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIZZERIA -->
+            <div class="service-scroll-card">
+                <div>
+                    <h4 style="color: var(--blu-arma); margin-top:0;">🍕 Pizzeria "del Carabiniere" <a href="tel:+3901035605976" class="phone-link" style="font-size: 13px; margin-left: 5px;">📞 010 35605976</a></h4>
+                    <div class="lang-content lang-it">
+                        <p class="desc"><strong>Ubicazione:</strong> Entrando dalla porta carraia, subito a destra.</p>
+                        <p class="desc"><strong>Orario:</strong> 19:00 - 24:00 (Mercoledì Chiuso)</p>
+                        <p class="desc">Pizze a partire da € 4,50. Primi e secondi piatti caldi da € 8,00.</p>
+                    </div>
+                    <div class="lang-content lang-en">
+                        <p class="desc"><strong>Location:</strong> Right after vehicle entrance on the right.</p>
+                        <p class="desc"><strong>Hours:</strong> 7:00 PM - 12:00 AM (Closed Wednesday).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CHIESA -->
+            <div class="service-scroll-card">
+                <div>
+                    <h4 style="color: var(--blu-arma); margin-top:0;">⛪ Chiesa</h4>
+                    <div class="lang-content lang-it">
+                        <p class="desc"><strong>Ubicazione e Accesso:</strong> Ubicata poco più avanti rispetto alla Mensa della Caserma. È <strong>sempre accessibile</strong> agli ospiti.</p>
+                        <p class="desc">L'orario delle celebrazioni e il contatto del cappellano militare sono disponibili tramite i QR code presenti in camera o all'ingresso della Cappella.</p>
+                    </div>
+                    <div class="lang-content lang-en">
+                        <p class="desc"><strong>Location:</strong> Located just past the Mess Hall. <strong>Always accessible</strong>.</p>
+                        <p class="desc">Mass schedule and chaplain contact available via QR code in room or chapel entrance.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LOCKER AMAZON -->
+            <div class="service-scroll-card">
+                <div>
+                    <h4 style="color: var(--blu-arma); margin-top:0;">📦 Locker Amazon "PUMA"</h4>
+                    <div class="lang-content lang-it">
+                        <p class="desc"><strong>Ubicazione:</strong> Posizionato appena varcato l'ingresso carraio della Caserma, direttamente attaccato al Corpo di Guardia.</p>
+                        <p class="desc">Utilizzabile inserendo il nome Locker <strong>"PUMA"</strong> per le tue consegne Amazon durante il soggiorno.</p>
+                    </div>
+                    <div class="lang-content lang-en">
+                        <p class="desc"><strong>Location:</strong> Right inside the vehicle entrance, next to Guard House. Name: <strong>"PUMA"</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EMAIL UFFICIALE --> 
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Contatti Ufficiali</span> 
+            <span class="lang-content lang-en">Official Contacts</span> 
+        </h2> 
+
+        <div class="card reveal"> 
+            <p><strong>Email Ufficiale:</strong> foresteria.genova.battaglione@carabinieri.it</p>
+            <a href="mailto:foresteria.genova.battaglione@carabinieri.it" class="btn" style="width: 100%; justify-content: center; box-sizing: border-box; font-size: 16px;"> 
+                ✉️ <span class="lang-content lang-it" style="margin-left: 8px;">Invia Email Ufficiale</span><span class="lang-content lang-en" style="margin-left: 8px;">Send Official Email</span> 
+            </a> 
+        </div> 
+
+        <!-- SEZIONE NOTIZIE TG24 -->
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">NOTIZIE TG24</span> 
+            <span class="lang-content lang-en">TG24 NEWS</span> 
+        </h2>
+        <div class="card reveal" style="padding: 0; overflow: hidden; border: none; box-shadow: 0 12px 30px rgba(0,0,0,0.12);">
+            <div class="sky-news-header">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div class="sky-news-badge">SKY TG24</div>
+                    <span class="sky-news-pulse"></span>
+                    <span style="font-weight: 800; color: #ffffff; font-size: 12px; letter-spacing: 0.5px;">DIRETTA ORA NAZIONALE</span>
+                </div>
+                <div style="display: flex; gap: 5px;">
+                    <button class="news-nav-btn" onclick="prevNews()">❮</button>
+                    <button class="news-nav-btn" onclick="nextNews()">❯</button>
+                </div>
+            </div>
+            <div class="news-carousel-wrapper">
+                <div class="news-carousel" id="newsCarousel">
+                    <!-- Feed di default pronto -->
+                    <div class="news-card-item">
+                        <div class="news-item-title">Ultime notizie dall'Italia e dal Mondo</div>
+                        <div class="news-item-desc">Rimani costantemente aggiornato con le notizie di cronaca, politica ed esteri curate direttamente da Sky TG24.</div>
+                        <a href="https://tg24.sky.it/" target="_blank" class="news-item-link">🌐 Vai al sito ufficiale Sky TG24 ➔</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- METEO LOCALE --> 
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Meteo Genova & Liguria</span> 
+            <span class="lang-content lang-en">Genoa & Liguria Weather</span> 
+        </h2> 
+        
+        <div class="card reveal"> 
+            <div class="live-weather-card"> 
+                <div class="live-weather-text">📍 Genova Sturla</div> 
+                <div> 
+                    <span class="live-weather-icon" id="weather-icon">☀️</span> 
+                    <span class="live-weather-temp" id="weather-temp">--°C</span> 
+                </div> 
+                <div class="live-weather-text" id="weather-status">Caricamento meteo...</div> 
+            </div> 
+            
+            <div class="lang-content lang-it"> 
+                <p class="desc">Consulta le previsioni meteo estese e le allerte ufficiali della Regione Liguria prima di organizzare le tue uscite:</p>
+            </div> 
+            <div class="lang-content lang-en"> 
+                <p class="desc">Check real-time weather forecasts and official alerts before planning your day out:</p>
+            </div> 
+
+            <div class="buttons-row"> 
+                <a href="https://www.3bmeteo.com/meteo/genova" target="_blank" class="btn btn-meteo" style="margin: 0; flex: 1; text-align: center;"> 
+                    <span class="lang-content lang-it">Meteo Genova (3B)</span> 
+                    <span class="lang-content lang-en">Genoa Weather (3B)</span> 
+                </a> 
+                <a href="https://allertaliguria.regione.liguria.it/" target="_blank" class="btn btn-info" style="margin: 0; flex: 1; text-align: center;"> 
+                    <span class="lang-content lang-it">Allerte Arpal</span> 
+                    <span class="lang-content lang-en">Arpal Alerts</span> 
+                </a> 
+            </div> 
+        </div> 
+
+        <!-- SEZIONE ESPLORA IN CITTA' (CAROSELLO SCORREVOLE) --> 
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Da Esplorare in Città</span> 
+            <span class="lang-content lang-en">To Explore in the City</span> 
+        </h2> 
+
+        <!-- BOX NOTA -->
+        <div class="card reveal" style="background: #f8fafc; border-top: 3px solid var(--blu-arma); padding: 18px 22px; margin-bottom: 15px;">
+            <div class="lang-content lang-it">
+                <p style="margin: 0; font-size: 14px; color: #475569; line-height: 1.6;">
+                    🏛️ <em>Le tappe presentate rappresentano soltanto un assaggio delle meraviglie di Genova. Per consultare tutti gli itinerari:</em> 
+                    <a href="https://www.visitgenoa.it/it" target="_blank" style="color: var(--rosso-arma); font-weight: 700; text-decoration: none;">🌐 Visit Genoa - Portale Ufficiale</a>
+                </p>
+            </div>
+            <div class="lang-content lang-en">
+                <p style="margin: 0; font-size: 14px; color: #475569; line-height: 1.6;">
+                    🏛️ <em>The sights featured offer a glimpse of Genoa. For full itineraries:</em> 
+                    <a href="https://www.visitgenoa.it/en" target="_blank" style="color: var(--rosso-arma); font-weight: 700; text-decoration: none;">🌐 Visit Genoa - Official Portal</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="scroll-hint">👈 SCORRI VERSO DESTRA PER LE ATTRAZIONI 👉</div>
+
+        <!-- CAROSELLO CITTA' -->
+        <div class="horizontal-scroll-container reveal">
+            <!-- ACQUARIO DI GENOVA -->
+            <div class="place-card-scroll"> 
+                <div class="aquarium-animated-box">
+                    <img class="place-img" src="https://i.imgur.com/pU3XRzc.jpg" alt="Acquario di Genova" onclick="openModal(this.src)">
+                    <div class="aquarium-shimmer"></div>
+                    <div class="aquarium-bubble ab1"></div>
+                    <div class="aquarium-bubble ab2"></div>
+                    <div class="aquarium-bubble ab3"></div>
+                    <div class="aquarium-bubble ab4"></div>
+                    <div class="aquarium-bubble ab5"></div>
+                    <div class="aquarium-fish af-right1">🐟</div>
+                    <div class="aquarium-fish af-left1">🐠</div>
+                    <div class="aquarium-fish af-right2">🐡</div>
+                    <div class="aquarium-fish af-left2">🐬</div>
+                    <div class="aquarium-badge">🎟️ CONVENZIONE MYSITE</div>
+                </div>
+                <div class="place-content"> 
+                    <div>
+                        <h3>🐬 Acquario di Genova</h3> 
+                        <span class="dist">🚗 ~ 15-20 min in auto / 🚆 15 min treno</span> 
+                        <div class="lang-content lang-it"><p class="desc">L'Acquario più grande d'Europa. Per le agevolazioni riservate al personale, accedete al profilo <strong>MySite</strong> nella sezione "Convenzioni".</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">Europe's largest Aquarium. Check your institutional <strong>MySite</strong> portal under "Conventions" for discounts.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Acquario+di+Genova" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Auto</a> 
+                        <a href="#" onclick="openTrain('Genova Piazza Principe'); return false;" class="btn btn-treno" style="margin: 0;">🚂 Trenitalia</a>
+                        <a href="https://www.acquariodigenova.it/" target="_blank" class="btn btn-info" style="margin: 0; font-size: 12px; padding: 8px 12px;">🌐 Sito</a> 
+                    </div> 
+                </div> 
+            </div>
+
+            <!-- SPIAGGE DI STURLA -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop" alt="Spiagge di Sturla" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>Spiagge di Sturla</h3>
+                        <span class="dist">🚶‍♂️ ~ 5 min a piedi / 🚗 2 min</span>
+                        <div class="lang-content lang-it"><p class="desc">A pochissimi passi dalla Foresteria (Via Maggio). Troverete sia stabilimenti balneari che una comoda spiaggia libera.</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">Just a few steps away down Via Maggio. Features both equipped beach clubs and a free public beach.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/search/Spiaggia+Libera+Sturla+Via+Maggio" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Mappa</a> 
+                    </div> 
+                </div> 
+            </div>
+
+            <!-- PASSEGGIATA DI NERVI -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://i.imgur.com/vwj3MOK.jpg" alt="Passeggiata di Nervi" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>Passeggiata di Nervi</h3>
+                        <span class="dist">🚗 ~ 10-12 min in auto / 🚆 10 min treno</span>
+                        <div class="lang-content lang-it"><p class="desc">Splendida passeggiata a mare scolpita nella scogliera con immensi parchi storici adiacenti.</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">Beautiful seaside promenade carved into the cliff with huge historic parks behind.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Passeggiata+Anita+Garibaldi+Nervi" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Auto</a> 
+                        <a href="#" onclick="openTrain('Genova Nervi'); return false;" class="btn btn-treno" style="margin: 0;">🚂 Trenitalia</a>
+                        <a href="https://www.visitgenoa.it/it/nervi-0" target="_blank" class="btn btn-info" style="margin: 0; font-size: 12px; padding: 8px 12px;">🌐 Info</a> 
+                    </div> 
+                </div> 
+            </div>
+
+            <!-- PARCO BAMBINI QUINTO -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://i.imgur.com/D5X9W8i.jpg" alt="Parco Bambini Quinto" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>Parco Giochi (Quinto)</h3>
+                        <span class="dist">🚗 ~ 7 min in auto / 🚆 2 fermate</span>
+                        <div class="lang-content lang-it"><p class="desc">Area verde attrezzata per bambini a Genova Quinto, situata direttamente vicino al mare.</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">Equipped green playground area for kids in Genova Quinto, right near the sea.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/search/Parco+Giochi+Genova+Quinto" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Auto</a> 
+                        <a href="#" onclick="openTrain('Genova Quinto al Mare'); return false;" class="btn btn-treno" style="margin: 0;">🚂 Trenitalia</a>
+                    </div> 
+                </div> 
+            </div>
+
+            <!-- BOCCADASSE -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://i.imgur.com/NsUxoTR.jpg" alt="Borgo di Boccadasse" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>Boccadasse & Vernazzola</h3>
+                        <span class="dist">🚗 ~ 4 min in auto / 🚶‍♂️ 15 min a piedi</span>
+                        <div class="lang-content lang-it"><p class="desc">Antico borgo di pescatori con casette colorate. Vernazzola è la vicina spiaggetta più tranquilla.</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">Ancient fishing village famous for colorful houses and its charming atmosphere.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Boccadasse,+Genova" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Mappa Navigatore</a> 
+                    </div> 
+                </div> 
+            </div>
+
+            <!-- CORSO ITALIA -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://i.imgur.com/gnwA5Zx.jpg" alt="Corso Italia" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>Corso Italia & Centro</h3> 
+                        <span class="dist">🚗 ~ 10 min in auto / 🚆 15 min treno</span>
+                        <div class="lang-content lang-it"><p class="desc">La passeggiata a mare della città che conduce verso il Centro Storico e i vicoli (caruggi).</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">The main seaside promenade leading directly towards the Historic Center.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Centro+Storico+Genova" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Auto</a> 
+                        <a href="#" onclick="openTrain('Genova Brignole'); return false;" class="btn btn-treno" style="margin: 0;">🚂 Trenitalia</a>
+                    </div> 
+                </div> 
+            </div>
+        </div>
+
+        <!-- LOCALI ALL'ESTERNO (CAROSELLO SCORREVOLE) --> 
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Locali all'Esterno</span>
+            <span class="lang-content lang-en">Dining Outside</span>
+        </h2> 
+
+        <div class="scroll-hint">👈 SCORRI VERSO DESTRA PER I LOCALI 👉</div>
+
+        <div class="horizontal-scroll-container reveal">
+            <div class="restaurant-scroll-card"> 
+                <div>
+                    <h4>🍦 Sturla: Gelaterie & Bar</h4>
+                    <div class="lang-content lang-it"><p class="desc">Vicinissimo alla foresteria scendendo verso le spiagge, ottime gelaterie artigianali e bar rinfrescanti.</p></div> 
+                    <div class="lang-content lang-en"><p class="desc">Very close to the guesthouse down towards the beach, great artisanal ice cream shops.</p></div> 
+                </div>
+                <a href="https://www.google.com/maps/search/Gelateria+Genova+Sturla" target="_blank" class="btn" style="margin: 0; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center;">📍 Cerca su Maps</a>
+            </div> 
+
+            <div class="restaurant-scroll-card"> 
+                <div>
+                    <h4>🍝 Trattorie Tipiche</h4>
+                    <div class="lang-content lang-it"><p class="desc">A due passi troverete storiche trattorie liguri, famose per il pesto e il pesce fresco vicinissimo al mare.</p></div> 
+                    <div class="lang-content lang-en"><p class="desc">Historic Ligurian trattorias famous for pesto and fresh seafood near the coast.</p></div> 
+                </div>
+                <a href="https://www.google.com/maps/search/Ristoranti+Genova+Sturla" target="_blank" class="btn" style="margin: 0; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center;">📍 Cerca su Maps</a>
+            </div> 
+
+            <div class="restaurant-scroll-card"> 
+                <div>
+                    <h4>🍹 Boccadasse: Aperitivi</h4>
+                    <div class="lang-content lang-it"><p class="desc">Tappa a 15 min a piedi per gustare un gelato o un aperitivo seduti direttamente sugli scogli del borgo.</p></div> 
+                    <div class="lang-content lang-en"><p class="desc">A 15-minute walk to enjoy gelato or drinks directly on the rocks of the village.</p></div> 
+                </div>
+                <a href="https://www.google.com/maps/search/Locali+Boccadasse" target="_blank" class="btn" style="margin: 0; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center;">📍 Cerca su Maps</a>
+            </div> 
+
+            <div class="restaurant-scroll-card"> 
+                <div>
+                    <h4>🧀 Focaccerie Locali</h4>
+                    <div class="lang-content lang-it"><p class="desc">In Piazza Sturla e dintorni panifici storici dove provare la tipica focaccia genovese o la farinata.</p></div> 
+                    <div class="lang-content lang-en"><p class="desc">Historic bakeries in Piazza Sturla to try authentic Genoese focaccia or farinata.</p></div> 
+                </div>
+                <a href="https://www.google.com/maps/search/Focacceria+Genova+Sturla" target="_blank" class="btn" style="margin: 0; padding: 8px 15px; width: 100%; box-sizing: border-box; text-align: center;">📍 Cerca su Maps</a>
+            </div> 
+        </div> 
+
+        <!-- INFO & TRASPORTI --> 
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Info & Trasporti</span>
+            <span class="lang-content lang-en">Info & Transport</span>
+        </h2> 
+        
+        <div class="card reveal"> 
+            <ul class="info-list"> 
+                <li> 
+                    <span class="emoji">🚆</span> 
+                    <span class="lang-content lang-it"><strong>Stazione FS Sturla:</strong> A soli 5 minuti a piedi. È il mezzo perfetto e più veloce per raggiungere Genova Brignole, l'Acquario, Nervi o le 5 Terre.</span>
+                    <span class="lang-content lang-en"><strong>Sturla Train Station:</strong> Just a 5-minute walk. The fastest way to reach the City Center, Aquarium, Nervi or Cinque Terre.</span>
+                    <div class="buttons-row" style="margin-top: 10px;"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Stazione+Genova+Sturla" target="_blank" class="btn btn-info" style="margin:0;">📍 Mappa Stazione</a>
+                        <a href="#" onclick="openTrain(''); return false;" class="btn btn-treno" style="margin:0;">🚂 Trenitalia (da Sturla)</a>
+                    </div> 
+                </li> 
+                <li style="margin-top: 20px;"> 
+                    <span class="emoji">🚌</span> 
+                    <span class="lang-content lang-it"><strong>Autobus (AMT):</strong> A pochi passi dalla struttura si trovano diverse fermate bus per spostarsi in città.</span>
+                    <span class="lang-content lang-en"><strong>Bus (AMT):</strong> Bus stops are located a few steps from the facility.</span>
+                    <div class="buttons-row" style="margin-top: 10px;"> 
+                        <a href="https://www.amt.genova.it/amt/" target="_blank" class="btn btn-info" style="margin:0;">🚌 Sito AMT</a>
+                    </div> 
+                </li> 
+                <li style="margin-top: 20px;"> 
+                    <span class="emoji">🛒</span> 
+                    <span class="lang-content lang-it"><strong>Supermercati & Farmacie:</strong> Nelle vicinanze (Via Isonzo / Piazza Sturla) vari supermercati ben forniti e farmacie.</span>
+                    <span class="lang-content lang-en"><strong>Supermarkets & Pharmacies:</strong> Well-stocked supermarkets and pharmacies nearby.</span>
+                </li> 
+            </ul> 
+        </div> 
+
+        <!-- SEZIONE ESPLORA LA RIVIERA DI LEVANTE (CAROSELLO SCORREVOLE) --> 
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Esplora la Riviera di Levante</span>
+            <span class="lang-content lang-en">Explore the Eastern Riviera</span>
+        </h2> 
+
+        <!-- BOX NOTA LIGURIA -->
+        <div class="card reveal" style="background: #f8fafc; border-top: 3px solid var(--rosso-arma); padding: 18px 22px; margin-bottom: 15px;">
+            <div class="lang-content lang-it">
+                <p style="margin: 0; font-size: 14px; color: #475569; line-height: 1.6;">
+                    ✨ <em>Tempi di percorrenza calcolati con partenza da <strong>Via Brigata Salerno 19, Genova (Stazione Sturla)</strong>. Per scoprire tutto il territorio:</em> 
+                    <a href="https://www.lamialiguria.it/it/" target="_blank" style="color: var(--rosso-arma); font-weight: 700; text-decoration: none;">🌐 La Mia Liguria - Portale Ufficiale</a>
+                </p>
+            </div>
+            <div class="lang-content lang-en">
+                <p style="margin: 0; font-size: 14px; color: #475569; line-height: 1.6;">
+                    ✨ <em>Travel times calculated from <strong>Via Brigata Salerno 19, Genoa (Sturla Station)</strong>. To explore more:</em> 
+                    <a href="https://www.lamialiguria.it/en/" target="_blank" style="color: var(--rosso-arma); font-weight: 700; text-decoration: none;">🌐 La Mia Liguria - Official Portal</a>
+                </p>
+            </div>
+        </div>
+
+        <div class="scroll-hint">👈 SCORRI VERSO DESTRA PER I BORGHI 👉</div>
+
+        <!-- CAROSELLO RIVIERA -->
+        <div class="horizontal-scroll-container reveal">
+            <!-- BOGLIASCO -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://i.imgur.com/pxC8Mss.jpg" alt="Bogliasco" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>🌊 Bogliasco</h3>
+                        <span class="dist">🚗 ~ 18 min in auto | 🚆 ~ 12 min in treno</span>
+                        <div class="lang-content lang-it"><p class="desc">Caratteristico borgo marinaro con case color pastello, scogliera e spiaggetta amata dai surfisti.</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">First seaside village outside Genoa with pastel houses, cliffs, and a picturesque beach.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Bogliasco" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Auto</a>
+                        <a href="#" onclick="openTrain('Bogliasco'); return false;" class="btn btn-treno" style="margin: 0;">🚂 Trenitalia</a>
+                    </div> 
+                </div> 
+            </div> 
+
+            <!-- RECCO -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://i.imgur.com/9524THU.jpg" alt="Recco" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>🍕 Recco & Focaccia IGP</h3>
+                        <span class="dist">🚗 ~ 25 min in auto | 🚆 ~ 22 min in treno</span>
+                        <div class="lang-content lang-it"><p class="desc">Capitale gastronomica famosa per l'autentica e inimitabile Focaccia col Formaggio IGP.</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">Gastronomic capital famous worldwide for its original Cheese Focaccia IGP.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Recco" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Auto</a>
+                        <a href="#" onclick="openTrain('Recco'); return false;" class="btn btn-treno" style="margin: 0;">🚂 Trenitalia</a>
+                    </div> 
+                </div> 
+            </div> 
+
+            <!-- CAMOGLI -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://i.imgur.com/WKaPPHv.jpg" alt="Camogli" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>⛵ Borgo di Camogli</h3>
+                        <span class="dist">🚗 ~ 30 min in auto | 🚆 ~ 26 min in treno</span>
+                        <div class="lang-content lang-it"><p class="desc">Incantevole porticciolo, palazzi colorati e traghetti diretti all'Abbazia di San Fruttuoso.</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">Charming harbor with tall colorful houses. Ferries for San Fruttuoso Abbey leave here.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Camogli" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Auto</a>
+                        <a href="#" onclick="openTrain('Camogli-San Fruttuoso'); return false;" class="btn btn-treno" style="margin: 0;">🚂 Trenitalia</a>
+                    </div> 
+                </div> 
+            </div> 
+
+            <!-- SANTA MARGHERITA -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://i.imgur.com/EFu4yXw.jpg" alt="Santa Margherita Ligure" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>🌴 Santa Margherita</h3>
+                        <span class="dist">🚗 ~ 35 min in auto | 🚆 ~ 32 min in treno</span>
+                        <div class="lang-content lang-it"><p class="desc">Eleganza con passeggiata a mare alberata, lussuese ville storiche e un porto suggestivo.</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">Elegant town with palm-lined promenade, historic villas, and a picturesque marina.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Santa+Margherita+Ligure" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Auto</a>
+                        <a href="#" onclick="openTrain('S. Margherita Ligure-Portofino'); return false;" class="btn btn-treno" style="margin: 0;">🚂 Trenitalia</a>
+                    </div> 
+                </div> 
+            </div> 
+
+            <!-- PORTOFINO -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://i.imgur.com/ye5HJMU.jpg" alt="Portofino" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>🛥️ Portofino</h3>
+                        <span class="dist">🚗 ~ 45 min in auto | 🚆 Treno a S. Margherita + Bus/Traghetto</span>
+                        <div class="lang-content lang-it"><p class="desc">La perla del Golfo del Tigullio, celebre per la Piazzetta, yacht e il Parco Naturale.</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">World-famous pearl of Liguria known for its iconic Piazzetta and Natural Park.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Portofino" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Auto</a>
+                        <a href="#" onclick="openTrain('S. Margherita Ligure-Portofino'); return false;" class="btn btn-treno" style="margin: 0;">🚂 Trenitalia</a>
+                    </div> 
+                </div> 
+            </div> 
+
+            <!-- CINQUE TERRE -->
+            <div class="place-card-scroll"> 
+                <img class="place-img" src="https://i.imgur.com/Y01X0DV.jpg" alt="Cinque Terre" onclick="openModal(this.src)">
+                <div class="place-content"> 
+                    <div>
+                        <h3>🚂 Le Cinque Terre</h3>
+                        <span class="dist">🚗 ~ 1h 15 min | 🚆 ~ 1h in treno diretto</span>
+                        <div class="lang-content lang-it"><p class="desc">I famosi 5 borghi UNESCO. Consigliamo vivamente il treno da Sturla verso Monterosso.</p></div> 
+                        <div class="lang-content lang-en"><p class="desc">Iconic UNESCO villages. Train directly from Sturla to Monterosso is highly recommended.</p></div> 
+                    </div>
+                    <div class="buttons-row"> 
+                        <a href="https://www.google.com/maps/dir/?api=1&origin=Via+Brigata+Salerno+19+Genova&destination=Monterosso+al+Mare" target="_blank" class="btn" style="margin: 0; font-size: 12px; padding: 8px 12px;">📍 Auto</a>
+                        <a href="#" onclick="openTrain('Monterosso'); return false;" class="btn btn-treno" style="margin: 0;">🚂 Trenitalia</a>
+                    </div> 
+                </div> 
+            </div> 
+        </div>
+
+        <!-- SEZIONE REGISTRO SEGNALAZIONI --> 
+        <h2 class="section-title reveal"> 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Fiamma_Carabinieri.svg" class="fiamma-icon" alt="Fiamma" onerror="this.style.display='none'"> 
+            <span class="lang-content lang-it">Registro Foresterie per Reclami e Suggerimenti</span>
+            <span class="lang-content lang-en">Guesthouse Registry for Complaints and Suggestions</span>
+        </h2> 
+        
+        <div class="card reveal" style="margin-bottom: 50px;"> 
+            <div class="lang-content lang-it"> 
+                <h4 style="color: var(--blu-arma); margin-top: 0; margin-bottom: 15px; font-size: 18px;">NOTE CONSULTAZIONE E COMPILAZIONE:</h4>
+                <ol style="padding-left: 20px; font-size: 15px; color: #475569; margin-bottom: 25px; line-height: 1.8;"> 
+                    <li style="margin-bottom: 12px;">Il presente registro è a disposizione degli ospiti per raccogliere suggerimenti volti a migliorare i servizi offerti o per segnalare eventuali disservizi riscontrati durante il soggiorno.</li>
+                    <li style="margin-bottom: 12px;">Le segnalazioni possono essere espresse in forma nominale o anonima. La compilazione dei recapiti consentirà al Comando di fornire riscontro sulle azioni intraprese.</li>
+                    <li>Il personale preposto alla gestione della Foresteria consulta periodicamente il registro e sottopone le segnalazioni al Comandante del Battaglione.</li>
+                </ol> 
+            </div> 
+
+            <div class="lang-content lang-en"> 
+                <h4 style="color: var(--blu-arma); margin-top: 0; margin-bottom: 15px; font-size: 18px;">CONSULTATION AND COMPILATION NOTES:</h4>
+                <ol style="padding-left: 20px; font-size: 15px; color: #475569; margin-bottom: 25px; line-height: 1.8;"> 
+                    <li style="margin-bottom: 12px;">This registry is available to guests to collect suggestions aimed at improving the services offered or to report any disservices encountered during the stay.</li>
+                    <li style="margin-bottom: 12px;">Reports can be made nominally or anonymously. Providing contact details will allow the Command to provide feedback on the actions taken.</li>
+                    <li>The staff responsible for managing the Guesthouse periodically consults the registry and submits the reports to the Battalion Commander.</li>
+                </ol> 
+            </div> 
+
+            <!-- PULSANTE REGISTRO --> 
+            <div style="background: #f8fafc; padding: 20px; border-radius: 12px; border: 1px solid #e2e8f0;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfdpP2hEG78SgSebS-xEoPZks3k2cesMAxpDmYh03bUqrRbmg/viewform" target="_blank" class="btn btn-call" style="margin:0; flex:1; justify-content:center; text-align:center; padding: 14px; font-size: 15px;">
+                        <span class="lang-content lang-it">✍️ Apri e Compila il Registro</span>
+                        <span class="lang-content lang-en">✍️ Open and Fill out the Registry</span>
+                    </a> 
+                </div> 
+            </div> 
+        </div> 
+
+        <!-- EASTER EGG --> 
+        <div style="text-align: center; font-size: 3px; color: #f1f5f9; margin-top: 20px; user-select: none;">
+            B.C. Pirozzi 2° BTG LIGURIA
+        </div> 
+
+    </div> 
+
+    <!-- MODALE FINASTRA ZOOM IMMAGINI -->
+    <div id="imageModal" class="image-modal" onclick="closeModal()">
+        <span class="image-modal-close" onclick="closeModal()">&times;</span>
+        <img class="image-modal-content" id="modalImg">
+        <div class="zoom-hint">🔍 Clicca o usa due dita per ingrandire / Clicca altrove per chiudere</div>
+    </div>
+
+    <!-- Script Cambio Lingua, Animazione Mappa, Trenitalia, Copia, Meteo e Notizie TG24 --> 
+    <script> 
+        let currentLang = 'it'; 
+        function setLanguage(lang) { 
+            currentLang = lang; 
+            const allContent = document.querySelectorAll('.lang-content'); 
+            allContent.forEach(el => el.style.display = 'none'); 
+            const selectedContent = document.querySelectorAll('.lang-' + lang); 
+            selectedContent.forEach(el => { 
+                if(el.tagName.toLowerCase() === 'span') { el.style.display = 'inline'; } 
+                else { el.style.display = 'block'; } 
+            }); 
+            const buttons = document.querySelectorAll('.lang-btn'); 
+            buttons.forEach(btn => btn.classList.remove('active')); 
+            document.getElementById('btn-' + lang).classList.add('active'); 
+        } 
+
+        // ANIMAZIONE PERCORSI MAPPA CASERMA
+        function animatePath(type) {
+            const routeBar = document.getElementById('routeBar');
+            const routeATM = document.getElementById('routeATM');
+            const routeGym = document.getElementById('routeGym');
+            const pinBar = document.getElementById('pinBar');
+            const pinATM = document.getElementById('pinATM');
+            const pinGym = document.getElementById('pinGym');
+
+            // Reset visibilità
+            routeBar.style.display = 'none';
+            routeATM.style.display = 'none';
+            routeGym.style.display = 'none';
+            routeBar.classList.remove('active');
+            routeATM.classList.remove('active');
+            routeGym.classList.remove('active');
+            pinBar.classList.remove('highlighted');
+            pinATM.classList.remove('highlighted');
+            pinGym.classList.remove('highlighted');
+
+            if (type === 'bar') {
+                routeBar.style.display = 'block';
+                setTimeout(() => { routeBar.classList.add('active'); }, 50);
+                pinBar.classList.add('highlighted');
+            } else if (type === 'atm') {
+                routeATM.style.display = 'block';
+                setTimeout(() => { routeATM.classList.add('active'); }, 50);
+                pinATM.classList.add('highlighted');
+            } else if (type === 'gym') {
+                routeGym.style.display = 'block';
+                setTimeout(() => { routeGym.classList.add('active'); }, 50);
+                pinGym.classList.add('highlighted');
+            }
+        }
+
+        // Generatore reindirizzamento diretto a Trenitalia
+        function openTrain(destinationStation) {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hour = String(now.getHours()).padStart(2, '0');
+            
+            const originStation = "Genova Sturla";
+            let url = "";
+
+            if (!destinationStation) {
+                url = `https://www.trenitalia.com/it/informazioni/cerca_e_acquista.html?stazionePartenza=${encodeURIComponent(originStation)}`;
+            } else {
+                url = `https://www.trenitalia.com/it/informazioni/cerca_e_acquista.html?stazionePartenza=${encodeURIComponent(originStation)}&stazioneArrivo=${encodeURIComponent(destinationStation)}&dataPartenza=${day}%2F${month}%2F${year}&oraPartenza=${hour}`;
+            }
+            
+            window.open(url, '_blank');
+        }
+
+        // Funzione Copia negli Appunti
+        function copyToClipboard(elementId, buttonEl) {
+            const textToCopy = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = buttonEl.innerText;
+                buttonEl.innerText = "✓ Copiato!";
+                buttonEl.style.backgroundColor = "#16a34a";
+                setTimeout(() => {
+                    buttonEl.innerText = originalText;
+                    buttonEl.style.backgroundColor = "#334155";
+                }, 2000);
+            }).catch(err => {
+                alert("Impossibile copiare il testo.");
+            });
+        }
+
+        // Gestione Zoom Immagine (Lightbox Modal)
+        function openModal(imgSrc) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImg");
+            modal.style.display = "flex";
+            modalImg.src = imgSrc;
+        }
+
+        function closeModal() {
+            document.getElementById("imageModal").style.display = "none";
+        }
+
+        // Meteo 
+        async function loadLiveWeather() { 
+            try { 
+                const res = await fetch('https://api.open-meteo.com/v1/forecast?latitude=44.4056&longitude=8.9463&current_weather=true'); 
+                const data = await res.json(); 
+                
+                if (data && data.current_weather) { 
+                    const temp = Math.round(data.current_weather.temperature); 
+                    const code = data.current_weather.weathercode; 
+                    
+                    document.getElementById('weather-temp').innerText = temp + '°C'; 
+                    
+                    let icon = '☀️'; 
+                    let text = 'Sereno'; 
+                    
+                    if (code >= 1 && code <= 3) { icon = '⛅'; text = 'Poco Nuvoloso'; } 
+                    else if (code >= 45 && code <= 48) { icon = '🌫️'; text = 'Nebbia'; } 
+                    else if (code >= 51 && code <= 67) { icon = '🌧️'; text = 'Pioggia'; } 
+                    else if (code >= 71 && code <= 77) { icon = '❄️'; text = 'Neve'; } 
+                    else if (code >= 80 && code <= 82) { icon = '🌦️'; text = 'Rovesci'; } 
+                    else if (code >= 95) { icon = '⛈️'; text = 'Temporale'; } 
+                    
+                    document.getElementById('weather-icon').innerText = icon; 
+                    document.getElementById('weather-status').innerText = text; 
+                } 
+            } catch (e) { 
+                document.getElementById('weather-icon').innerText = '☀️'; 
+                document.getElementById('weather-temp').innerText = '22°C'; 
+                document.getElementById('weather-status').innerText = 'Sereno'; 
+            } 
+        } 
+
+        // NOTIZIE TG24 IN TEMPO REALE GARANTITE
+        let currentNewsIndex = 0;
+        let totalNewsCount = 0;
+        let newsAutoTimer;
+
+        // Lista notizie statiche/fallback per garantire la visualizzazione istantanea
+        const fallbackNews = [
+            {
+                title: "Notizie Italia & Mondo - Diretta Sky TG24",
+                desc: "Segui le ultime notizie di cronaca, politica, economia ed esteri aggiornate 24 ore su 24.",
+                link: "https://tg24.sky.it/"
+            },
+            {
+                title: "Previsioni Meteo e Allerte Nazionali",
+                desc: "Consulta la situazione meteorologica aggiornata e i bollettini ufficiali della protezione civile.",
+                link: "https://tg24.sky.it/meteo"
+            },
+            {
+                title: "Mobilità e Trasporti in Italia",
+                desc: "Tutti gli aggiornamenti su traffico, orari dei treni e collegamenti nazionali in tempo reale.",
+                link: "https://tg24.sky.it/cronaca"
+            }
+        ];
+
+        async function loadLiveNews() {
+            const carousel = document.getElementById('newsCarousel');
+            try {
+                // Fetch via AllOrigins per superare i blocchi CORS
+                const res = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://sky.it/rss/skytg24_italia.xml'));
+                const data = await res.json();
+
+                if (data && data.contents) {
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(data.contents, "text/xml");
+                    const items = xmlDoc.querySelectorAll("item");
+
+                    if (items.length > 0) {
+                        carousel.innerHTML = '';
+                        totalNewsCount = items.length;
+
+                        items.forEach((item) => {
+                            const title = item.querySelector("title") ? item.querySelector("title").textContent : "";
+                            const link = item.querySelector("link") ? item.querySelector("link").textContent : "https://tg24.sky.it/";
+                            let desc = item.querySelector("description") ? item.querySelector("description").textContent : "";
+                            desc = desc.replace(/<[^>]*>?/gm, '').substring(0, 140) + "...";
+
+                            const newsDiv = document.createElement('div');
+                            newsDiv.className = 'news-card-item';
+                            newsDiv.innerHTML = `
+                                <div class="news-item-title">${title}</div>
+                                <div class="news-item-desc">${desc}</div>
+                                <a href="${link}" target="_blank" class="news-item-link">🌐 Leggi l'articolo completo su Sky TG24 ➔</a>
+                            `;
+                            carousel.appendChild(newsDiv);
+                        });
+
+                        startNewsAutoScroll();
+                        return;
+                    }
+                }
+                throw new Error("RSS non caricato");
+            } catch (e) {
+                // Caricamento schede interattive di backup trasparenti
+                carousel.innerHTML = '';
+                totalNewsCount = fallbackNews.length;
+                fallbackNews.forEach((item) => {
+                    const newsDiv = document.createElement('div');
+                    newsDiv.className = 'news-card-item';
+                    newsDiv.innerHTML = `
+                        <div class="news-item-title">${item.title}</div>
+                        <div class="news-item-desc">${item.desc}</div>
+                        <a href="${item.link}" target="_blank" class="news-item-link">🌐 Apri il portale Sky TG24 ➔</a>
+                    `;
+                    carousel.appendChild(newsDiv);
+                });
+                startNewsAutoScroll();
+            }
+        }
+
+        function scrollToNews(index) {
+            const carousel = document.getElementById('newsCarousel');
+            if (totalNewsCount > 0) {
+                if (index < 0) index = totalNewsCount - 1;
+                if (index >= totalNewsCount) index = 0;
+                currentNewsIndex = index;
+                const cardWidth = carousel.querySelector('.news-card-item').offsetWidth + 15;
+                carousel.scrollTo({
+                    left: cardWidth * currentNewsIndex,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function nextNews() {
+            scrollToNews(currentNewsIndex + 1);
+            resetNewsTimer();
+        }
+
+        function prevNews() {
+            scrollToNews(currentNewsIndex - 1);
+            resetNewsTimer();
+        }
+
+        function startNewsAutoScroll() {
+            newsAutoTimer = setInterval(() => {
+                scrollToNews(currentNewsIndex + 1);
+            }, 5000); // Avanzamento automatico ogni 5 secondi
+        }
+
+        function resetNewsTimer() {
+            clearInterval(newsAutoTimer);
+            startNewsAutoScroll();
+        }
+
+        // Rilevamento swipe/touch
+        document.getElementById('newsCarousel').addEventListener('touchstart', resetNewsTimer);
+
+        // Scroll Animazioni 
+        function reveal() { 
+            var reveals = document.querySelectorAll(".reveal"); 
+            for (var i = 0; i < reveals.length; i++) { 
+                var windowHeight = window.innerHeight; 
+                var elementTop = reveals[i].getBoundingClientRect().top; 
+                var elementVisible = 50; 
+                
+                if (elementTop < windowHeight - elementVisible) { 
+                    reveals[i].classList.add("active"); 
+                } 
+            } 
+        } 
+
+        window.addEventListener("scroll", reveal); 
+
+        document.addEventListener('DOMContentLoaded', () => { 
+            setLanguage('it'); 
+            loadLiveWeather(); 
+            loadLiveNews();
+            reveal(); 
+        }); 
+    </script> 
+</body> 
+</html>
